@@ -1,0 +1,81 @@
+<%# 
+    To create a form for a resource (i.e. model), use
+    the form_for helper instead of form_tag. Its usual 
+    arguments
+    - A named argument 'model' which is assigned an 
+        instance of a model (i.e. a new question)
+    - A named argument 'local', which will prevent
+        the form from submitting its data using 'ajax'
+    - A block that is passed the form object, where 
+        we build the HTML inside the form (i.e. labels, 
+        inputs, submission buttons, etc...)
+
+    All data from the input fields a form built with this will have its name-value
+    nested in a hash named after the class of the passed model 
+    (e.g. <input type="text" name="question[title]" id="questio_title"> => {
+        "question": { "title": "your question title" }
+    })
+%>
+
+<% if @question.errors.any? %>
+    <ul>
+        <% @question.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+<%# https://guides.rubyonrails.org/form_helpers.html %>
+<%= form_with  model: @question, local: true do |f| %>
+    <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :body %>
+        <%= f.text_area :body, class: 'form-control', cols: 50, rows: 5 %>
+    </div>
+
+
+    <%# <div class="tag-container"> %>
+        <%#= f.collection_check_boxes :tag_ids, Tag.order(name: :ASC), :id, :name do |t| %> 
+            <%# <div class="tag-wrapper"> %>
+                <%#= t.check_box %>
+                <%#= t.text %>
+            <%# </div> %>
+        <%# end %>
+    <%# </div> %>
+    <div class="form-group">
+        <%= f.label :tag_names %>
+        <%= f.text_field :tag_names %>
+    </div>
+    <%= f.submit %>
+<% end %>
+
+<%# selectize doc: 
+    https://github.com/selectize/selectize.js/blob/master/docs/usage.md 
+%>
+
+<script>
+    $(function(){
+        $('#question_tag_names').selectize({
+            delimeter: ',',
+            persist: false,
+            labelField: 'name',
+            valueField: 'name',
+            searchField: 'name',
+            options: <%= Tag.select(:name).to_json(except: [:id]).html_safe %>,
+            // The above line selects only names from tags table and converts them to
+            // a json array of objects
+            // without including ids and makes sure its a safe_html string
+            // options: [{"name": "first tag"}, {"name": "second tag"}, {"name": "third tag"},
+            //           {"name": "fourth tag"}, {"name": "fifth tag"}, ...]
+            create: function(input) {
+                return {
+                    name: input 
+                }
+            }
+        });
+    });
+</script>

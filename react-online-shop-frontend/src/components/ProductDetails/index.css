@@ -1,0 +1,37 @@
+.products-details{
+    display: flex;
+    flex-direction: column;
+}
+
+.index-container{
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+.column-right{
+    background-image: url(https://images.unsplash.com/photo-1586652171272-8f18c34f79af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.products-details{
+    width: 30%;
+    border: 3px solid #FA824C;
+    padding: 1vh;
+    padding-left: 9vh;
+    margin: 1vh;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #342E37 ;
+}
+
+.products-details h2{
+    color: #FAFFFD;
+}
+
+.products-details p {
+    color: #FAFFFD;
+}

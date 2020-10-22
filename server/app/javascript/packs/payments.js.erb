@@ -1,0 +1,45 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    if (!document.getElementById('card-element')) {
+        return
+    }
+    //Set you publishable key, remeber to change this publishable key in production
+    var stripe = Stripe("<%= ENV['STRIPE_PUBLISHABLE_KEY']%>");
+
+    var elements = stripe.elements();
+    // Add your base input styles here.
+    var style = {
+        base: {
+            fontSize: '16px',
+            color: '#32325d'
+        }
+    };
+
+    var card = elements.create('card', {
+        style: style
+    });
+
+    // Add as instance of the card Element into the 'card-element' <div>
+    card.mount('#card-element');
+
+    // Creating token or display an error when the form is submitted.
+
+    var form = document.getElementById('payment-form');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        stripe.createToken(card).then(function (result) {
+            if (result.error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                document.getElementById('stripe_token').value = result.token.id;
+                document.getElementById('stripe-token-form').submit();
+            }
+
+
+        });
+
+
+    });
+});

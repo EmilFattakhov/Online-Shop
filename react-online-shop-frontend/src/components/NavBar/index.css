@@ -1,0 +1,38 @@
+.navbar{
+    background-color: #FAFFFD;
+    height: 5vh;
+    padding-bottom: 3vh;
+    border-bottom: 1px solid black;
+}
+
+.container-split{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.links{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links h1{
+    color: black;
+    font-size: 20px;
+}
+
+.links h2{
+    color:black;
+    font-size: 15px;
+}
+
+.links a {
+    color: black;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 1vh;
+    width: auto;
+    padding-left: 1vh;
+    padding-right: 1vh;
+}

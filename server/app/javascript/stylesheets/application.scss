@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css?family=Staatliches|Thasadith|Fira+Sans|Roboto|Hepta+Slab&display=swap");
+@import "bootstrap";
+
+h1, a {
+    font-family: Staatliches;
+}
+
+h3 > a {
+    font-family: "Fira Sans";
+}
+
+.nav-links a {
+    margin-left: 1em;
+}
+
+.tags {
+    display: inline-block;
+    background-color: lightgrey;
+    padding: 0px 5px; 
+}
+
+.tag-container {
+    border: 1px solid lightgrey; 
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.tag-wrapper {
+    display: inline-block;
+    padding: 0px 5px;
+}
